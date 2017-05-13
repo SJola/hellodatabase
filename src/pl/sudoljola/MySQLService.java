@@ -23,6 +23,13 @@ public class MySQLService {
             for (int i = 1; i <= columnCount; i++) {
                 System.out.print(resultSet.getMetaData().getColumnName(i) + "\t");
             }
+            while (resultSet.next()) {
+                System.out.println();
+                for (int i = 1; i <= columnCount; i++) {
+                    System.out.print(resultSet.getString(i) + "\t");
+                }
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
