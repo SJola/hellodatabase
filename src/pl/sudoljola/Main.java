@@ -4,5 +4,6 @@ public class Main {
 
     public static void main(String[] args) {
 	MySQLService mySQLService = new MySQLService();
+	mySQLService.getData("select * from customer");
     }
 }

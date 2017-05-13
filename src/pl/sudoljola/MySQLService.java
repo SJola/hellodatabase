@@ -13,11 +13,25 @@ public class MySQLService {
 
     public MySQLService() {
         connect();
+    }
 
+    public void getData(String query) {
+        executeQuery(query);
+        try {
+            int columnCount = resultSet.getMetaData().getColumnCount();
 
+            for (int i = 1; i <= columnCount; i++) {
+                System.out.print(resultSet.getMetaData().getColumnName(i) + "\t");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void executeQuery(String queryToExecute) {
         try {
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT * FROM customer");
+            resultSet = statement.executeQuery(queryToExecute);
             System.out.println(resultSet.getMetaData().getColumnCount());
         } catch (SQLException e) {
             e.printStackTrace();
