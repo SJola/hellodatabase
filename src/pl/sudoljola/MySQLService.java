@@ -1,6 +1,7 @@
 package pl.sudoljola;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Created by RENT on 2017-05-13.
@@ -14,6 +15,30 @@ public class MySQLService {
     public MySQLService() {
         connect();
     }
+
+    public String[][] data(String query) {
+        executeQuery(query);
+
+        try {
+            int columnCount = resultSet.getMetaData().getColumnCount();
+            ArrayList<String[]> dataArr = new ArrayList<>();
+
+            while (resultSet.next()) {
+                String[] rowData = new String[columnCount];
+                for (int i = 1; i <= columnCount; i++) {
+                    rowData[i - 1] = resultSet.getString(i);
+                }
+                dataArr.add(rowData);
+            }
+            return dataArr.toArray(new String[dataArr.size()][columnCount]);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;//TODO
+    }
+
 
     public void getData(String query) {
         executeQuery(query);

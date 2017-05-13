@@ -15,6 +15,7 @@ public class Main {
         frame.setMinimumSize(new Dimension(500, 500));
 
         DataPanel dataPanel = new DataPanel();
+        dataPanel.fillWithDataByQuery("select * from customer");
         frame.setContentPane(dataPanel);
         frame.pack();
         frame.setVisible(true);
